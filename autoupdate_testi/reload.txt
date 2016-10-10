@@ -1,0 +1,1 @@
+Muutoksia tehdään reload.txt tiedostoon ja sieltä ne päivittyvät tälle sivulle (index.php). 2342435
