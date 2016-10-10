@@ -79,7 +79,7 @@ var ti = ({bussiID: req.ID, nopeus: req.nopeus, yhteys: req.yhteys});
 
 // RENDERÖIDÄÄN MUUTTUJAT INDEX.PUGIIN!!!
 app.get('/valvomo', function (req, res) {
-    res.render('index', { title: 'Sensoridata:', message: ti});
+    res.render('index', { title: 'Sensoridata', message: ti});
     console.log("piri toimii");
 });
 // 'index' -> minne renderöidään (index.pug)
@@ -93,7 +93,6 @@ app.listen(27017, function () {
 
     });
     
-
     
     }
 
