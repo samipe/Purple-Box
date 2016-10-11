@@ -28,10 +28,17 @@ var tiedot = mongoose.model('tiedot', bussiskeema);
     
 var ti; //alustetaan muuttuja ti
     
+var nopeus = [];
+    
+var yhteys = [];
+    
 app.post('/bussidata', function (req, res) {
-//  var piri = "kovaa kamaa";
+    nopeus [req.body.ID-1] = req.body.nopeus;
+    yhteys [req.body.ID-1] = req.body.yhteys;
     ti = new tiedot({bussiID: req.body.ID, nopeus: req.body.nopeus, yhteys: req.body.yhteys});
-    console.log(req.body)
+    console.log(req.body);
+    console.log('Nopeus on: ', nopeus);
+    console.log('Yhteys on: ', yhteys);
     res.status(451).send("moi");
     
     // eritellään muuttuja B
