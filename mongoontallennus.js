@@ -31,7 +31,7 @@ var ti; //alustetaan muuttuja ti
 app.post('/bussidata', function (req, res) {
 //  var piri = "kovaa kamaa";
     ti = new tiedot({bussiID: req.body.ID, nopeus: req.body.nopeus, yhteys: req.body.yhteys});
-    console.log(req.body)
+    console.log('pitäisi näkyä kännyposti tässä: ', req.body)
     res.status(451).send("moi");
     
     // eritellään muuttuja B
@@ -85,11 +85,11 @@ app.get('/valvomo', function (req, res) {
 // 'index' -> minne renderöidään (index.pug)
 // {}-sulkujen sisään mitä renderöidään    
     
-app.listen(27017, function () {
+app.listen(3000, function () {
         //  Start the app on the specific interface (and port).
         var ipaddress = "localhost";
-        var port = 27017;
-        console.log('kuunnellaan porttia 27017');
+        var port = 3000;
+        console.log('kuunnellaan porttia 3000');
 
     });
     
