@@ -1,0 +1,11 @@
+body {
+    font-family: sans-serif;
+    color: aliceblue;
+    background: #666;
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    display: inline;
+}
