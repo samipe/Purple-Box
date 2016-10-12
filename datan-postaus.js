@@ -1,8 +1,6 @@
 // TOIMII!!!
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
-var random = Math.floor((Math.random() * 10) + 1);
-
 setInterval(function() {
    // rando testausta varten
     var random = Math.floor((Math.random() * 10) + 1);
