@@ -2,14 +2,16 @@ var mongoose = require('mongoose');
 var express = require("express");
 var app = express();
 var router = express.Router();
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+var http = require('http');
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
 app.set('view engine', 'pug');
 
 var bussiskannaus = function(){
-    
-app.use( bodyParser.json() );       // to support JSON-encoded bodies ty7vcytv
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-  extended: true
+    app.use( bodyParser.json() );       // to support JSON-encoded bodies ty7vcytv
+    app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+    extended: true
 })); 
 //app.use(express.json());
 // Connect to MongoDB and create/use database called todoAppTest
@@ -27,6 +29,18 @@ var Todo = mongoose.model('bussidataa', bussiskeema);
 var tiedot = mongoose.model('tiedot', bussiskeema);  
     
 var ti; //alustetaan muuttuja ti
+
+app.get('/', function(req, res){
+    res.sendfile('index.html');
+});    
+    
+io.on('connection', function(socket) {
+     console.log('a user connected');
+});
+    
+app.get('/', function(req, res){
+  res.sendFile(__dirname + '/index.html');
+});    
     
 app.post('/bussidata', function (req, res) {
 //  var piri = "kovaa kamaa";
@@ -92,6 +106,10 @@ app.listen(3000, function () {
         console.log('kuunnellaan porttia 3000');
 
     });
+    
+server.listen(3001, function(){
+    console.log('listening on *;3001');
+});    
     
     
     }
