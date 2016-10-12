@@ -3,9 +3,8 @@ var express = require("express");
 var app = express();
 var router = express.Router();
 var bodyParser = require('body-parser');
-var http = require('http');
-var server = http.createServer(app);
-var io = require('socket.io').listen(server);
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 app.set('view engine', 'pug');
 
 var bussiskannaus = function(){
@@ -31,15 +30,7 @@ var tiedot = mongoose.model('tiedot', bussiskeema);
 var ti; //alustetaan muuttuja ti
 
 app.get('/', function(req, res){
-    res.sendfile('index.html');
-});    
-    
-io.on('connection', function(socket) {
-     console.log('a user connected');
-});
-    
-app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + '/index.html');
 });    
     
 app.post('/bussidata', function (req, res) {
@@ -47,6 +38,7 @@ app.post('/bussidata', function (req, res) {
     ti = new tiedot({bussiID: req.body.ID, nopeus: req.body.nopeus, yhteys: req.body.yhteys});
     console.log('pitäisi näkyä kännyposti tässä: ', req.body)
     res.status(451).send("moi");
+    io.emit('bussiID', JSON.stringify(ti));
     
     // eritellään muuttuja B
     
@@ -76,7 +68,11 @@ app.post('/bussidata', function (req, res) {
     return ti;    
 });
 
-    
+io.on('connection', function(socket) {
+     socket.on('bussiID', function(msg){
+         console.log('message: ' + ti);
+     });
+});     
     
 router.route("/bussidata").post(function(req, res){
 var ti = ({bussiID: req.ID, nopeus: req.nopeus, yhteys: req.yhteys});
@@ -107,7 +103,7 @@ app.listen(3000, function () {
 
     });
     
-server.listen(3001, function(){
+http.listen(3001, function(){
     console.log('listening on *;3001');
 });    
     
