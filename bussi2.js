@@ -1,6 +1,8 @@
 // TOIMII!!!
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
+var bussiID = 2;
+
 var nopeus = 20;
 
 setInterval(function() {
@@ -24,7 +26,7 @@ setInterval(function() {
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
     // Syötetään sensoridata
-    var sensoridata = {ID:2, nopeus:nopeus, yhteys:'Rautatientori - Kamppi'};
+    var sensoridata = {ID:bussiID, nopeus:nopeus, yhteys:'Rautatientori - Kamppi'};
     console.log(sensoridata);
 
     // Lähetetään sensoridata
