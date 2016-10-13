@@ -27,73 +27,57 @@ var Todo = mongoose.model('bussidataa', bussiskeema);
 
 var tiedot = mongoose.model('tiedot', bussiskeema);  
     
-var ti; //alustetaan muuttuja ti
+var ti; // alustetaan muuttuja ti
 
 app.get('/', function(req, res){
     res.sendFile(__dirname + '/index.html');
-});    
+});       
     
 app.post('/bussidata', function (req, res) {
-//  var piri = "kovaa kamaa";
     ti = new tiedot({bussiID: req.body.ID, nopeus: req.body.nopeus, yhteys: req.body.yhteys});
     console.log('pitäisi näkyä kännyposti tässä: ', req.body)
     res.status(451).send("moi");
-    io.emit('bussiID', JSON.stringify(ti));
-    
-    // eritellään muuttuja B
-    
-    /*var xmlhttp;
-    xmlhttp = new XMLHttpRequest();
-    xmlhttp.send(JSON.stringify('nopeus=32'));*/
-    
-    /*var valvomoBussiID = obj.bussiID;
-    var valvomoNopeus = obj.nopeus;
-    var valvomoYhteys = obj.yhteys;*/
+    // tulostettava data:
+    if(ti.bussiID === 1) {
+         io.emit('bussiID1', ('ID: ' + ti.bussiID + ', Nopeus: ' + ti.nopeus + ', Yhteys: ' + ti.yhteys + ', Viimeisin tieto: ' + ti.viimeisin_tieto));
+    } else {
+        io.emit('bussiID2', ('ID: ' + ti.bussiID + ', Nopeus: ' + ti.nopeus + ', Yhteys: ' + ti.yhteys + ', Viimeisin tieto: ' + ti.viimeisin_tieto));
+    };
     
     ti.save(function(err){
   if(err)
     console.log(err);
   else
       
-    // eritellään muuttujat A 
-    /*
-    var jsonData = JSON.parse(ti);
-    for (var i = 0; i < jsonData.tiedot.length; i++) {
-        var tiedot = jsonData.tiedot[i];
-        console.log(tiedot.bussiID);
-    }
-    */
-      
     console.log("TALLENNETTU TIETOKANTAAN SEURAAVAA:  ", ti);
     return ti;    
 });
 
-io.on('connection', function(socket) {
-     socket.on('bussiID', function(msg){
-         console.log('message: ' + ti);
-     });
-});     
-    
+
+if(ti.bussiID === 1) {
+    console.log('message1: ' + ti);
+    io.on('connection', function(socket) {    
+        socket.on('bussiID1', function(msg1){
+        });
+    });    
+} else {
+    console.log('message2: ' + ti);
+    io.on('connection', function(socket) {
+        socket.on('bussiID2', function(msg2){
+        });
+
+    });
+};        
+          
 router.route("/bussidata").post(function(req, res){
 var ti = ({bussiID: req.ID, nopeus: req.nopeus, yhteys: req.yhteys});
     console.log('router toimii: ', ti);
-    
-    
+        
 // Save it to database
 
-
 })
-
     
 });
-
-// RENDERÖIDÄÄN MUUTTUJAT INDEX.PUGIIN!!!
-app.get('/valvomo', function (req, res) {
-    res.render('index', { title: 'Sensoridata', message: ti});
-    console.log("piri toimii");
-});
-// 'index' -> minne renderöidään (index.pug)
-// {}-sulkujen sisään mitä renderöidään    
     
 app.listen(3000, function () {
         //  Start the app on the specific interface (and port).
@@ -106,7 +90,6 @@ app.listen(3000, function () {
 http.listen(3001, function(){
     console.log('listening on *;3001');
 });    
-    
     
     }
 
