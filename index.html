@@ -1,26 +1,19 @@
 <!doctype html>
-<html>
-  <head>
-    <title>Socket.IO</title>
-    <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 20px Helvetica, Arial; }
-    </style>
-  </head>
-  <body>
-    <p id="messages"></p>
-    <br>  
-    <p id="messages2"></p>
-    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-    <script>
-      var socket = io();
-      socket.on('bussiID1', function(msg1){
-        $('#messages').text(msg1);
-      });  
-     socket.on('bussiID2', function(msg2){
-        $('#messages2').text(msg2);
-      });     
-    </script>
-  </body>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Robottibussin valvomo</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+
+  <link rel="stylesheet" href="css/styles.css?v=1.0">
+
+</head>
+
+<body>
+  <script src="js/scripts.js"></script>
+    Tähän päivittyy bussin uusimmat tiedot: <br>
+</body>
 </html>
