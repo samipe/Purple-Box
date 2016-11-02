@@ -6,7 +6,7 @@ var bussiID = 2;
 var nopeus = 20;
 
 setInterval(function() {
-   // random testausta varten
+    // random testausta varten
     var random = Math.floor((Math.random() * 2) + 1);
     if(random < 2) {
         if (nopeus === 0) {
@@ -21,7 +21,7 @@ setInterval(function() {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", 'http://localhost:3000/bussidata', true);
     xhr.onload = function (){
-            console.log('Piri');
+        console.log('Tallennettu');
     }
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 

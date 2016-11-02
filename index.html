@@ -8,9 +8,19 @@
     </style>
   </head>
   <body>
+    <script>
+    function haeBussiID() {
+        var bussiID = document.bussinvalinta.bussinnumero.value;
+    }
+    </script>     
+    <form name="bussinvalinta">
+        <input type="text" name="bussinnumero">
+        <input type="submit" value="Submit" onclick="haeBussiID()">
+    </form>       
     <p id="messages"></p>
     <br>  
     <p id="messages2"></p>
+    <script>document.write(bussiID);</script>  
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
@@ -18,7 +28,7 @@
       socket.on('bussiID1', function(msg1){
         $('#messages').text(msg1);
       });  
-     socket.on('bussiID2', function(msg2){
+        socket.on('bussiID2', function(msg2){
         $('#messages2').text(msg2);
       });     
     </script>

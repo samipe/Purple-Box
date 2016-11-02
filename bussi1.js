@@ -21,7 +21,7 @@ setInterval(function() {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", 'http://localhost:3000/bussidata', true);
     xhr.onload = function (){
-            console.log('Piri');
+        console.log('Tallennettu');
     }
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
