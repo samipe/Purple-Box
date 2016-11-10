@@ -2,7 +2,7 @@
   "name": "etavalvonta",
   "version": "1.0.0",
   "description": "robottibussin sensoridatan siirto bussista palvelimelle sekä etävalvomoon",
-  "main": "datan-postaus.js",
+  "main": "bussi1.js",
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
@@ -13,11 +13,9 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
-    "engines": {
-        "node": "5.4.1",
-    },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Robobussitiimi/etavalvonta.git"
@@ -28,7 +26,4 @@
     "url": "https://github.com/Robobussitiimi/etavalvonta/issues"
   },
   "homepage": "https://github.com/Robobussitiimi/etavalvonta#readme"
-    "engines:"
-    
 }
-
