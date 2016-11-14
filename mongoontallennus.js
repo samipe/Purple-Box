@@ -21,6 +21,7 @@ var bussiskeema = new mongoose.Schema({
     bussiID: Number,
     nopeus: Number,
     yhteys: String,
+	GPS: String,
     viimeisin_tieto: { type: Date, default: Date.now },
 });
 
@@ -37,12 +38,19 @@ app.get('/', function(req, res){
 });
 //DATAN VASTAANOTTO
 app.post('/bussidata', function (req, res) {
-    dataEntry = new tiedot({bussiID: req.body.ID, nopeus: req.body.nopeus, yhteys: req.body.yhteys});
+    dataEntry = new tiedot({bussiID: req.body.ID, nopeus: req.body.nopeus, yhteys: req.body.yhteys, GPS: req.body.GPS});
     console.log('Seuraavaa sensoridataa vastaanotettu: ', req.body)
     res.status(451).send(" ");
 
-        
-            
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+app.get('/', function (req, res){
+    res.json(dataEntry)        
+            })
 
     dataEntry.save(function(err){
         if(err)
@@ -53,12 +61,12 @@ app.post('/bussidata', function (req, res) {
     });
 
     //Datan lähetys selaimelle
-            io.emit('bussiID' +dataEntry.bussiID, ('ID: ' + dataEntry.bussiID + ', Nopeus: ' + dataEntry.nopeus + ', Yhteys: ' + dataEntry.yhteys + ', Viimeisin tieto: ' + dataEntry.viimeisin_tieto));
+            io.emit('bussiID' +dataEntry.bussiID, ('ID: ' + dataEntry.bussiID + '\r\n GPS: ' + dataEntry.GPS + ', Nopeus: ' + dataEntry.nopeus + ', Yhteys: ' + dataEntry.yhteys + ', Viimeisin tieto: ' + dataEntry.viimeisin_tieto));
     console.log("Tiedot Lähetetty indeksiin " + dataEntry.bussiID)
         
     
     router.route("/bussidata").post(function(req, res){
-    var dataEntry = ({bussiID: req.ID, nopeus: req.nopeus, yhteys: req.yhteys});
+    var dataEntry = ({bussiID: req.ID, nopeus: req.nopeus, yhteys: req.yhteys, GPS: req.GPS});
         console.log('Osoite /bussidata auki tiedon lähetykselle');
  })
    
