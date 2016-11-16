@@ -1,71 +1,83 @@
 <!doctype html>
 <html>
   <head>
+      <script>//document.write(document.bussinvalinta.bussinnumero.value);</script>  
+      <script src="http://mbostock.github.com/d3/d3.v2.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+      <script src="graafi.js"></script>
     <title>Valvomo client</title>
     <style>
+        path {
+				stroke: steelblue;
+				stroke-width: 1;
+				fill: none;
+			}
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font: 10px Helvetica, Arial; color: white; }
 html, body { height: 100%; padding: 0; margin: 0; }
-div { width: 50%; height: 50%; float: left; }
+div { position: relative; width: 50%; height: 50%; float: left; }
 input {
-	width: 7%;
+	width: 4%;
 }
 #div1 { background: #111; }
 #div2 { background: #222; }
 #div3 { background: #333; }
 #div4 { background: #111; }
+.sensoridata {position: absolute; bottom: 7px; left:5px; }
     </style>
   </head>
   <body>
     <script>
-    function haeBussiID() {
-        var bussiID = document.bussinvalinta.bussinnumero.value;
-    }
-    </script>         
-<div id="div1">
-<form name="bussivalinta">
-	<input type="text" name="bussinumero">
-	<input type="submit" value="Bussi" onclick="haeBussiID()">
-	</form>
-<p id="ID1"></p>
-<p id="ID5"></p>
+        //Bussin valintanappula
+$(document).ready(function(){
+        $("#valinta1").click(function(){
+            var bussiID = document.getElementById('bussinumero1').value;
+$("#div1").append('<p class="sensoridata" id="ID'+bussiID+'"><div id="graph1" class="sensoridata" style="width:300px; height:30px;"></div></p>');
+$("#div1").append(displayGraphExample("#graph1", 300, 30, "basis", true, 1000, 1000));
+    
+});
+        $("#valinta2").click(function(){
+            var bussiID = document.getElementById('bussinumero2').value;
+$("#div2").append('<p class="sensoridata" id="ID'+bussiID+'"></p>');
+    
+});
+        $("#valinta3").click(function(){
+            var bussiID = document.getElementById('bussinumero3').value;
+$("#div3").append('<p class="sensoridata" id="ID'+bussiID+'"></p>');
+    
+});
+        $("#valinta4").click(function(){
+            var bussiID = document.getElementById('bussinumero4').value;
+$("#div4").append('<p class="sensoridata" id="ID'+bussiID+'"></p>');
+    
+});
+});
+    </script>
+      
+      <div id="div1">
+	<input type="text" id="bussinumero1">
+    <button id="valinta1">hae</button><br>
+
+	<!--<div id="graph1" class="sensoridata" style="width:300px; height:30px;"></div>
+    <script>displayGraphExample("#graph1", 300, 30, "basis", true, 1000, 1000);</script>-->
+	</p>
 </div>
 <div id="div2">
-<p id="ID2"></p>
-<p id="ID6"></p>
-<p id="ID9"></p>
+	<input type="text" id="bussinumero2">
+    <button id="valinta2">hae</button><br>
 </div>
 <div id="div3">
-<p id="ID3"></p>
-<p id="ID7"></p>
-<p id="ID10"></p>
+	<input type="text" id="bussinumero3">
+    <button id="valinta3">hae</button>
 </div>
 <div id="div4">
-<p id="ID4"></p>
-<p id="ID8"></p>
+	<input type="text" id="bussinumero4">
+    <button id="valinta4">hae</button>
+
 </div>
-    <p id="ID1"></p>
-    <br>  
-    <p id="ID2"></p>
-          <br>  
-    <p id="ID3"></p>
-          <br>  
-    <p id="ID4"></p>
-          <br>  
-    <p id="ID5"></p>
-          <br>  
-    <p id="ID6"></p>
-          <br>  
-    <p id="ID7"></p>
-          <br>  
-    <p id="ID8"></p>
-          <br>  
-    <p id="ID9"></p>
-          <br>  
-    <p id="ID10"></p>
-    <script>document.write(document.bussinvalinta.bussinnumero.value);</script>  
-    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+
+    
       
     <script>
       var socket = io().connect('http://busdata.metropolia.fi:3000');
@@ -73,10 +85,10 @@ input {
           
         $('#ID1').text(msg1);
       });  
-         socket.on('bussiID2', function(msg2){
+                     socket.on('bussiID2', function(msg3){
           
-        $('#ID2').text(msg2);
-      });  
+        $('#ID2').text(msg3);
+      }); 
                      socket.on('bussiID3', function(msg3){
           
         $('#ID3').text(msg3);
@@ -85,30 +97,7 @@ input {
           
         $('#ID4').text(msg4);
       });  
-                 socket.on('bussiID5', function(msg5){
-          
-        $('#ID5').text(msg5);
-      });  
-                 socket.on('bussiID6', function(msg6){
-          
-        $('#ID6').text(msg6);
-      });  
-                 socket.on('bussiID7', function(msg7){
-          
-        $('#ID7').text(msg7);
-      });  
-                 socket.on('bussiID8', function(msg8){
-          
-        $('#ID8').text(msg8);
-      });  
-                 socket.on('bussiID9', function(msg9){
-          
-        $('#ID9').text(msg9);
-      });  
-                 socket.on('bussiID10', function(msg10){
-          
-        $('#ID10').text(msg10);
-      });  
+
     </script>
   </body>
 </html>

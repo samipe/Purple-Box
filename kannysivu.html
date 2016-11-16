@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+  <head>
+      <!--<script src="clientskripti.js"></script>
+        -->
+      <script src="gps.js"></script>
+
+    <title>Socket.IO</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 20px Helvetica, Arial; }
+    </style>
+  </head>
+  <body>
+   <p>Click the button to get your coordinates.</p>
+
+<button onclick="getLocation()">Try It</button>
+
+<p id="demo"></p>
+
+<script>
+    //GET GPS
+    var x = document.getElementById("demo");
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.watchPosition(showPosition);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+function showPosition(position) {
+    x.innerHTML = "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude; 
+}
+    
+    
+    //SEND
+      var xhr = new XMLHttpRequest();
+
+var bussiID = 1;
+
+var nopeus = 20;
+
+setInterval(function() {
+   // random testausta varten
+    var random = Math.floor((Math.random() * 2) + 1);
+    if(random < 2) {
+        if (nopeus === 0) {
+            nopeus = nopeus + 1;
+        } else {
+            nopeus = nopeus - 1;
+        }
+    } else {
+        nopeus = nopeus + 1;
+    };
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", 'http://busdata.metropolia.fi:80/bussidata', true);
+    xhr.onload = function (){
+        console.log('Sensoridataa lähetetty');
+    }
+    xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+
+    // Syötetään sensoridata
+    var sensoridata = {ID:bussiID, nopeus:nopeus, yhteys:'Leppävaara - Vanha maantie 6', GPS:x.innerHTML};
+    console.log(sensoridata);
+
+    // Lähetetään sensoridata
+    xhr.send(JSON.stringify(sensoridata));
+}, 1000);
+      </script>      
+      
+      
+      
+      
+  </body>
+</html>
