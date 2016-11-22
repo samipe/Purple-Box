@@ -65,7 +65,7 @@ app.get('/', function (req, res){
 //    });
 
     //Datan lähetys selaimelle
-            io.emit('APP_ID' +dataEntry.APP_ID, ('DEV_ID: ' + dataEntry.DEV_ID + '\r\n GPS: ' + dataEntry.GPS + ', Nopeus: ' + dataEntry.nopeus + ', Yhteys: ' + dataEntry.yhteys + ', Viimeisin tieto: ' + dataEntry.TimeStamp));
+            io.emit('APP_ID' +dataEntry.APP_ID, (':DEV_ID:' + dataEntry.DEV_ID + ':GPS:' + dataEntry.GPS + ':Nopeus:' + dataEntry.nopeus + ':Yhteys:' + dataEntry.yhteys + ':Viimeisin tieto:' + dataEntry.TimeStamp));
     console.log("Tiedot Lähetetty indeksiin " + dataEntry.APP_ID);
         
     
