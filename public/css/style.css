@@ -15,7 +15,7 @@ input {
 .div3 { background: #333; }
 .div4 { background: #111; }
 .sensoridata {position: absolute; bottom: 7px; left:5px; }
-.dataText {position: absolute; bottom: 7px; left:5px; height: 25px; }
+.dataText {position: absolute; bottom: 7px; left:5px; height: 75px; }
 .chart {position: absolute; right:5px; bottom:2px; }
         
         .chart {

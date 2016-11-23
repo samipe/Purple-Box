@@ -24,7 +24,7 @@ var bussiskeema = new mongoose.Schema({
     DEV_ID: Number,
     nopeus: Number,
     yhteys: String,
-	GPS: String,
+	GPS: Array,
     TimeStamp: String,
     viimeisin_tieto: { type: Date, default: Date.now },
 });
