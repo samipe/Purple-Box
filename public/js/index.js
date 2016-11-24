@@ -19,6 +19,7 @@ $(document).ready(function() {
 	});
 		$('.piirraGyroNappi').click(function() {
 		$('.div' + quad).append(piirragyro());
+            
 	});
 });
 

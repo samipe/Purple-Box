@@ -116,7 +116,7 @@ input[type=checkbox]:after {
     padding-top: 5px;
     padding-bottom: 5px;
       font-size: 14px;
-      content: "O";
+      content:attr(name);
       color: #333;
       display:block;
  
