@@ -24,8 +24,15 @@
    <div class="dataText">
      Sensoridata tulee tähän
   </div>
-  <button class="piirraNopeusNappi">Näytä nopeuskäppyrä</button><br>
-  <button class="piirraGyroNappi">Näytä gyro</button><br>
+    <div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">Options</button>
+  <div id="myDropdown" class="dropdown-content">
+        <form action="">
+        <input type="checkbox" name="option" value="test" class="piirraNopeusNappi">Nopeuskuvaaja<br>
+        <input type="checkbox" name="option" value="test"class="piirraGyroNappi">Gyro
+        </form>
+  </div>
+</div>
 
     </div>
     </div>
