@@ -26,7 +26,29 @@ setInterval(function() {
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
     // Syötetään sensoridata
-    var sensoridata = {APP_ID:APP_ID, DEV_ID:'2', nopeus:nopeus, yhteys:'Leppävaara - Vanha maantie 6', TimeStamp:'16:30'};
+    var sensoridata = {
+        "app_id": "itku",
+        "dev_id": 2,
+        "timeStamp": "String",
+        "location": {
+            "coordinates": [1,2],
+            "speed": nopeus,
+            "heading": "String",
+            "altitude": 123
+        },
+        "audio": {
+             "maxDecibel": 72
+        },
+        "motionsensor": {
+            "stepCounter": 1234,
+            "acceleration": [1,2,3]
+        },
+        "device": {
+        "battery": 32,
+        "msg": "moi",
+        "storage": "5/32"
+        }
+    };
     console.log(JSON.stringify(sensoridata));
 
     // Lähetetään sensoridata
