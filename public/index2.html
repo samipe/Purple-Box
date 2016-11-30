@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+
+<head>
+  <script src="http://mbostock.github.com/d3/d3.v2.js"></script>
+  <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+  <script src="js/index.js"></script>
+  <script src='dist/dragula.js'></script>
+  <!--<script src='example/example.min.js'></script>-->
+
+  <script type="text/javascript" src="d3/d3.js"></script>
+  <title>Valvomo client</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
+</head>
+
+<body>
+  <div id="widgetSelect1" class="dropdown-content">
+    <form action="">
+      <h1>bussi 1 <br></h1>
+      <input type="checkbox" name="Raakadata" class="buttonRawData"><br>
+      <input type="checkbox" name="Gyro" class="piirraGyroNappi">
+    </form>
+  </div>
+  <div id="widgetSelect2" class="dropdown-content">
+    <form action="">
+      <h1>bussi 2 <br></h1>
+      <input type="checkbox" name="Raakadata" class="buttonRawData"><br>
+      <input type="checkbox" name="Gyro" class="buttonGyro"><br>
+      <input type="checkbox" name="Kartta" class="buttonMap"><br>
+      <input type="checkbox" name="Nopeuskäyrä" class="buttonSpeedBar"><br>
+      <input type="checkbox" name="Nopeuskäyrä2" class="buttonSpeedChart"><br>
+    </form>
+  </div>
+  <div id="widgetSelect3" class="dropdown-content">
+    <form action="">
+      <h1>bussi 3 <br></h1>
+      <input type="checkbox" name="Raakadata" class="buttonRawData"><br>
+      <input type="checkbox" name="Gyro" class="piirraGyroNappi">
+    </form>
+  </div>
+  <div id="widgetSelect4" class="dropdown-content">
+    <form action="">
+      <h1>bussi 4 <br></h1>
+      <input type="checkbox" name="Raakadata" class="buttonRawData"><br>
+      <input type="checkbox" name="Gyro" class="piirraGyroNappi">
+    </form>
+  </div>
+
+  <div id="topbar">
+    <div class="dropdown">
+      <button class="valintaLista 1">1</button>
+      <button class="valintaLista 2">2</button>
+      <button class="valintaLista 3">3</button>
+      <button class="valintaLista 4">4</button>
+    </div>
+  </div>
+  <div id="alaosa">
+    <div class='examples'>
+
+      <div class="div1">
+        <div id='right-defaults' class='container'>
+        <div class="dataBox 1">1</div>
+        <div class="dataBox 2">2</div>
+        <div class="dataBox 3">3</div>
+        <div class="dataBox 4"></div>
+        <div class="dataBox 5">
+        </div>
+      </div>
+      </div>
+
+      <div class="div2">
+        <div id='left-defaults' class='container'>
+          <div class="dataBox 1">asd </div>
+          <div class="dataBox 2">1 </div>
+          <div class="dataBox 3"> </div>
+          <div class="dataBox 4"> 2</div>
+          <div class="dataBox 5">
+            <div id='graph1' class='aGraph' style='width:300px; height:30px;'></div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="div3">
+        
+      </div>
+      <div class="div4">
+      </div>
+
+    </div>
+  </div>
+
+<script src='dist/dragula.js'></script>
+<script src='example/example.min.js'></script>
+
+</body>
+
+</html>
