@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html>
 
@@ -14,80 +15,58 @@
   <script type="text/javascript" src="d3/d3.js"></script>
 
 <meta charset='utf-8'>
-<link rel="shortcut icon" href="favicon.ico">
 <link href='dist/dragula.css' rel='stylesheet' type='text/css' />
 <link href='example/example.css' rel='stylesheet' type='text/css' />
-<title>dragula</title>
+<title>Etävalvomo client</title>
 </head>
 
 <body>
   <div id="widgetSelect1" class="dropdown-content">
     <form action="">
-      <h1>bussi 1 <br></h1>
-      <input type="checkbox" name="Raakadata" class="buttonRawData1">
-      <input type="checkbox" name="Gyro" class="buttonGyro1">
-      <input type="checkbox" name="Kartta" class="buttonMap1">
+      <h1>Bussi 1 <br></h1>
+      <input type="checkbox" name="Kaikki tiedot" class="buttonRawData1">
+      <input type="checkbox" name="Kiihtyvyys (gyro)" class="buttonGyro1">
       <input type="checkbox" name="Nopeuskäyrä" class="buttonSpeedBar1">
-      <input type="checkbox" name="Nopeuskäyrä2" class="buttonSpeedChart1">
+      <input type="checkbox" name="Melutaso (db)" class="buttonSpeedChart1">
     </form>
   </div>
   <div id="widgetSelect2" class="dropdown-content">
     <form action="">
-      <h1>bussi 2 <br></h1>
-      <input type="checkbox" name="Raakadata" class="buttonRawData2">
-      <input type="checkbox" name="Gyro" class="buttonGyro2">
-      <input type="checkbox" name="Kartta" class="buttonMap2">
+      <h1>Bussi 2 <br></h1>
+      <input type="checkbox" name="Kaikki tiedot" class="buttonRawData2">
+      <input type="checkbox" name="Kiihtyvyys (gyro)" class="buttonGyro2">
       <input type="checkbox" name="Nopeuskäyrä" class="buttonSpeedBar2">
-      <input type="checkbox" name="Nopeuskäyrä2" class="buttonSpeedChart2">
-    </form>
-  </div>
-  <div id="widgetSelect3" class="dropdown-content">
-    <form action="">
-      <h1>bussi 3 <br></h1>
-      <input type="checkbox" name="Raakadata" class="buttonRawData3">
-      <input type="checkbox" name="Gyro" class="buttonGyro3">
-      <input type="checkbox" name="Kartta" class="buttonMap3">
-      <input type="checkbox" name="Nopeuskäyrä" class="buttonSpeedBar3">
-      <input type="checkbox" name="Nopeuskäyrä2" class="buttonSpeedChart3">
-    </form>
-  </div>
-  <div id="widgetSelect4" class="dropdown-content">
-    <form action="">
-      <h1>bussi 4 <br></h1>
-      <input type="checkbox" name="Raakadata" class="buttonRawData4">
-      <input type="checkbox" name="Gyro" class="buttonGyro4">
-      <input type="checkbox" name="Kartta" class="buttonMap4">
-      <input type="checkbox" name="Nopeuskäyrä" class="buttonSpeedBar4">
-      <input type="checkbox" name="Nopeuskäyrä2" class="buttonSpeedChart4">
+      <input type="checkbox" name="Melutaso (db)" class="buttonSpeedChart2">
     </form>
   </div>
   <div id="ylapalkki">
   <div class="dropdown">
-    <button class="valintaLista 1">1</button>
-    <button class="valintaLista 2">2</button>
-    <button class="valintaLista 3">3</button>
-    <button class="valintaLista 4">4</button>
-  </div>
+    <button class="valintaLista1">1</button>
+    <button class="valintaLista2">2</button>
+
   </div>
 
+  </div>
+  
 <div class='wrapper'>
-  <div id='1-defaults' class='container'>
 
    
 
     
-  </div>
+
   <div id='2-defaults' class='container'>
-    
   </div>
   <div id='3-defaults' class='container'>
-    
   </div>
-  <div id='4-defaults' class='container'>
 
-  </div>
 </div>
-
+<div class='container2'>
+   <div id="mapid">
+       </div>
+         </div>
+      <form action="json.html">
+    <input class="rawjson" type="submit" value="RAW JSON" />
+</form>
 <!-- turhaa paskaa, ei saa poistaa -->
 <div class='wrapper'>
   <div id='sortable' class='containe2r'>

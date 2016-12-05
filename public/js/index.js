@@ -5,28 +5,48 @@ $(document).ready(function () {
 	let speedBarTimeProgress;
 	let data = {};
 	let chart;
+	let map = initMap(60.220037, 24.810368);
 
 	// uusin vastaanotettu sensoridata tallentuu tänne
 	let globalDataEntry;
 
-	socket.on('itku', function (msg1) {
-		let app_id = msg1.app_id;
-		let dev_id = msg1.dev_id;
+	socket.on('bussintarkkailu', function (msg1) {
+		/*let app_id = msg1.app_id;
+		*/let dev_id = msg1.dev_id;/*
 		let timeStamp = msg1.timeStamp;
 		let location = msg1.location;
 		let audio = msg1.audio;
 		let motionsensor = msg1.motionsensor;
-		let device = msg1.device;
+		let device = msg1.device;*/
 		// Piirretään uusimmat tiedot jos kenttä on luotu
 		if ($(`.wrapper > #2-defaults > #rawData2`).text().length > 5) {
-			console.log("toimii");
-			widgetRawDataRefresh(msg1);
+			if (dev_id === 1){
+			widgetRawDataRefresh1(msg1);
+			}
 		}
+		if ($(`.wrapper > #3-defaults > #rawData3`).text().length > 5) {
+			console.log("piri toimii :D 2");
+			if (dev_id === 2){
+			widgetRawDataRefresh2(msg1);
+			console.log("piri toimii :D");
+			}
+		}
+		if ($(`.wrapper > #2-defaults > #mapid`).text().length > 5) {
+			console.log("map toimii");
+			//markerLocations(map, 2, [2, 3])
+		}
+		if ($(`.wrapper > #2-defaults > #gyro2`).text().length > 5) {
+			console.log("gyro toimii");
+			piirragyro(msg1);
+		}
+
+		//KARTTA 
+		updateLocation(dev_id, msg1.location.coordinates);
 		globalDataEntry = msg1;
 	}
 	);
 
-	// Nappuloiden toiminta
+	// Nappuloiden toiminta 1
 	$('.buttonRawData1').click(function () {
 		if (this.checked) {
 			$(`.wrapper > #2-defaults`).append("<div id='rawData2'> Sensoridata näkyy tässä </div>");
@@ -43,11 +63,11 @@ $(document).ready(function () {
 	});
 	$('.buttonMap1').click(function () {
 		if (this.checked) {
-			 
-			 $(`.wrapper > #2-defaults`).append("<div id='mapid'></div>");
-			$(`.wrapper > #2-defaults`).append(widgetMap());
+
+			//$(`.wrapper > #2-defaults`).append("<div id='map2'><div id='mapid'></div></div>");
+
 		} else {
-			$(`.wrapper > #2-defaults > #mapid`).remove();
+			$(`.wrapper > #2-defaults > #map2`).remove();
 		}
 	});
 	$('.buttonSpeedBar1').click(function () {
@@ -60,25 +80,50 @@ $(document).ready(function () {
 	});
 	$('.buttonSpeedChart1').click(function () {
 		if (this.checked) {
-			$(`.wrapper > #2-defaults`).append("<div id='graph2' class='aGraph' style='width:300px; height:30px;'>asd</div>");
+			$(`.wrapper > #2-defaults`).append("<div id='graph2' class='aGraph' style='width:300px; height:30px;'>Nopeuskäyrä:</div>");
 		} else {
 			$(`.wrapper > #2-defaults > #graph2`).remove();
 		}
 	});
 
+	// Nappuloiden toiminta 2
+	$('.buttonRawData2').click(function () {
+		if (this.checked) {
+			$(`.wrapper > #3-defaults`).append("<div id='rawData3'> Sensoridata näkyy tässä </div>");
+		} else {
+			$(`.wrapper > #3-defaults > #rawData3`).remove();
+		}
+	});
+	$('.buttonGyro2').click(function () {
+		if (this.checked) {
+			$(`.wrapper > #3-defaults`).append("<div id='gyro2'> Gyro näkyy tässä </div>");
+		} else {
+			$(`.wrapper > #3-defaults > #gyro2`).remove();
+		}
+	});
+	$('.buttonSpeedBar2').click(function () {
+		if (this.checked) {
+			$(`.wrapper > #3-defaults`).append("<div id='speedBar2'> Speedbar näkyy tässä </div>");
+			initSpeedBar();
+		} else {
+			$(`.wrapper > #3-defaults > #speedBar2`).remove();
+		}
+	});
+	$('.buttonSpeedChart2').click(function () {
+		if (this.checked) {
+			$(`.wrapper > #3-defaults`).append("<div id='audio2'> Melutaso: </div>");
+		} else {
+			$(`.wrapper > #3-defaults > #audio2`).remove();
+		}
+	});
+
 
 	// Pudotusvalikkojen näyttäminen
-	$('.valintaLista.1').click(function () {
+	$('.valintaLista1').click(function () {
 		document.getElementById("widgetSelect1").classList.toggle("show");
 	});
-	$('.valintaLista.2').click(function () {
+	$('.valintaLista2').click(function () {
 		document.getElementById("widgetSelect2").classList.toggle("show");
-	});
-	$('.valintaLista.3').click(function () {
-		document.getElementById("widgetSelect3").classList.toggle("show");
-	});
-	$('.valintaLista.4').click(function () {
-		document.getElementById("widgetSelect4").classList.toggle("show");
 	});
 
 	// Close the dropdown menu if the user clicks outside of it
@@ -98,9 +143,18 @@ $(document).ready(function () {
 	*/
 
 
-	function widgetRawDataRefresh(globalDataEntry) {
+	function widgetRawDataRefresh1(globalDataEntry) {
 		$(`.wrapper > #2-defaults > #rawData2`).empty();
 		$(`.wrapper > #2-defaults > #rawData2`).append(
+			'Laite ID: ' + globalDataEntry.dev_id,
+			'<br>Nopeus: ' + globalDataEntry.location.speed,
+			'<br>GPS: ' + globalDataEntry.location.coordinates,
+			'<br>Viesti: ' + globalDataEntry.device.msg,
+			'<br>Viimeisin tieto: ' + globalDataEntry.timeStamp);
+	};
+	function widgetRawDataRefresh2(globalDataEntry) {
+		$(`.wrapper > #3-defaults > #rawData3`).empty();
+		$(`.wrapper > #3-defaults > #rawData3`).append(
 			'Laite ID: ' + globalDataEntry.dev_id,
 			'<br>Nopeus: ' + globalDataEntry.location.speed,
 			'<br>GPS: ' + globalDataEntry.location.coordinates,
@@ -227,7 +281,7 @@ $(document).ready(function () {
 				.attr('x', function (d) { return h - y(d.value) - .5; })
 				.attr('width', function (d) { return y(d.value); });
 		}
-		socket.on('itku', function (msg1) {
+		socket.on('bussintarkkailu', function (msg1) {
 			let nopeus = msg1.location.speed;
 			console.log("nopeuskäppyränopeus" + nopeus);
 			data.shift();
@@ -238,7 +292,7 @@ $(document).ready(function () {
 
 
 	function piirragyro() {
-		$(".div2").append("<div class='garden'><div class='ball'><pre class='output'></pre>");
+		$("#").append("<div class='garden'><div class='ball'><pre class='output'></pre>");
 		let ball = document.querySelector('.ball');
 		let garden = document.querySelector('.garden');
 		let output = document.querySelector('.output');
@@ -330,36 +384,43 @@ $(document).ready(function () {
 		}
 	}
 
-//Muuta nimeksi widgetMap
-function widgetMap() {
+	function initMap(lat, lon) {
+		//[60.220037, 24.810368]
+		let mapResult = L.map('mapid').setView([lat, lon], 14);
+		L.tileLayer('https://api.mapbox.com/styles/v1/niklasnu/civw7c6yq001y2jo50bx3mg3k/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibmlrbGFzbnUiLCJhIjoiY2l2dzczZnJpMDAwOTJ0bXZtM3UxcWtnciJ9.r5ajbQRLujQGJXzDLNfnNA', {
+			maxZoom: 18,
+			id: 'mapbox.mapbox-streets-v7',
+			accessToken: 'pk.eyJ1IjoibmlrbGFzbnUiLCJhIjoiY2l2dzczZnJpMDAwOTJ0bXZtM3UxcWtnciJ9.r5ajbQRLujQGJXzDLNfnNA'
+		}).addTo(mapResult);
 
-    var mymap = L.map('mapid').setView([60.220037, 24.810368], 14);
-    
-    L.tileLayer('https://api.mapbox.com/styles/v1/niklasnu/civw7c6yq001y2jo50bx3mg3k/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibmlrbGFzbnUiLCJhIjoiY2l2dzczZnJpMDAwOTJ0bXZtM3UxcWtnciJ9.r5ajbQRLujQGJXzDLNfnNA', {
-    maxZoom: 18,
-    id: 'mapbox.mapbox-streets-v7',
-    accessToken: 'pk.eyJ1IjoibmlrbGFzbnUiLCJhIjoiY2l2dzczZnJpMDAwOTJ0bXZtM3UxcWtnciJ9.r5ajbQRLujQGJXzDLNfnNA'
-}).addTo(mymap);
-    
-    //Päivitetään uusi sijaintitieto
-    updateLocation(mymap, "001", [60.220037, 24.810368] );    
-    
-    
-}
-    //Jos laite on lähettänyt uuden gps sijainnin, vanha sijainti marker poisteetaan ja uusi piirretään tilalle
-    var markerLocations = {};
-    function updateLocation(map, deviceID, coordinateArray) {
-    if (!markerLocations[deviceID] === undefined){
-        var oldMarker = markerLocations[deviceID];
-        map.removeLayer(oldMarker);
-    }
-    
-    //Piirretään uusi marker
-    var newMarker = L.marker(coordinateArray).addTo(map);
-    markerLocations[deviceID] = newMarker;
-    }
+		//Päivitetään uusi sijaintitieto
+		//updateLocation("001", [60.220037, 24.810368]);
+		return mapResult;
 
-    //function widgetMapRefresh() {
+	}
+	//Jos laite on lähettänyt uuden gps sijainnin, vanha sijainti marker poisteetaan ja uusi piirretään tilalle
+	var markerLocations = {};
+	function updateLocation(deviceID, coordinateArray) {
+		console.log(markerLocations[deviceID]);
+		if (!(markerLocations[deviceID] === undefined)) {
+			console.log("remove toimii?");
+			var oldMarker = markerLocations[deviceID];
+			map.removeLayer(oldMarker);
+		}
+
+		//Piirretään uusi marker
+		var newMarker = L.marker(coordinateArray).addTo(map);
+		markerLocations[deviceID] = newMarker;
+	}
 
 
 });
+
+
+
+
+
+
+
+
+

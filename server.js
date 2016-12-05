@@ -85,7 +85,7 @@ var bussiskannaus = function () {
         //io.emit('APP_ID' +dataEntry.APP_ID, (':DEV_ID:' + dataEntry.DEV_ID + ':GPS:' + dataEntry.GPS + ':Nopeus:' + dataEntry.nopeus + ':Viesti:' + dataEntry.viesti + ':Viimeisin tieto:' + dataEntry.timeStamp));
         //console.log("Tiedot Lähetetty indeksiin " + dataEntry.APP_ID);
         
-        io.emit('itku', dataEntry);
+        io.emit(dataEntry.app_id, dataEntry);
         console.log("Tiedot Lähetetty kanavaan " + dataEntry.app_id + " laitenumerolla " + dataEntry.dev_id);
 
 

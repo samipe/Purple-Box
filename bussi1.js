@@ -27,11 +27,11 @@ setInterval(function() {
 
     // Syötetään sensoridata
     var sensoridata = {
-        "app_id": "itku",
-        "dev_id": 2,
+        "app_id": "bussintarkkailu",
+        "dev_id": 1,
         "timeStamp": "String",
         "location": {
-            "coordinates": [1,2],
+            "coordinates": [60.1856871,24.682761],
             "speed": nopeus,
             "heading": "String",
             "altitude": 123
@@ -45,7 +45,7 @@ setInterval(function() {
         },
         "device": {
         "battery": 32,
-        "msg": "moi",
+        "msg": "Kaikki hyvin. Kyydissä 3 matkustajaa.",
         "storage": "5/32"
         }
     };
