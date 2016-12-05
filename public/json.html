@@ -1,0 +1,23 @@
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+const socket = io().connect('http://busdata.metropolia.fi:3000');
+$(document).ready(function () {
+	socket.on('itku', function (msg1) {
+        let dataEntry = JSON.stringify(msg1) + "<br>";
+        $(".json-dump").append(dataEntry);
+	});
+});
+</script>
+<html>
+
+<head>
+    <title>JSON Dump</title>
+</head>
+
+<body>
+    <div class="json-dump">
+    </div>
+</body>
+
+</html>

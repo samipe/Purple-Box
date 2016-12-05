@@ -1,0 +1,26 @@
+<!doctype HTML>
+<html>
+<head>
+    <meta http-equiv="refresh" content="5">
+    <title>testi</title>
+    <script>
+        var mypostrequest=new ajaxRequest()
+        mypostrequest.onreadystatechange=function(){
+            if (mypostrequest.readyState==4){
+            if (mypostrequest.status==200 || window.location.href.indexOf("http")==-1){
+               document.getElementById("result").innerHTML=mypostrequest.responseText
+              }
+              else{
+               alert("An error has occured making the request")
+              }
+             }
+            }
+            mypostrequest.open("POST", "http://localhost:27017/bussidata", true)
+            mypostrequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+            mypostrequest.send('parameters')
+    </script>
+</head>
+<body>
+
+</body>
+</html>        
