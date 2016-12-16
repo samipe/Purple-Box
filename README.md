@@ -1,7 +1,9 @@
 # Purple Box
 Purple Box is scalable serverless platform that gathers and monitors sensordata. To send data to the purple box you need a client device, such as an Android phone.
 
-# Receiving data in a web client
+# Usage example
+
+## Receiving data in a web client
 
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
@@ -24,7 +26,7 @@ Purple Box is scalable serverless platform that gathers and monitors sensordata.
      </body>
     </html>
     
-# Sending JSON-data
+## Sending JSON-data
 
     class AsyncT extends AsyncTask<Void, Void, Void> {
 
@@ -51,3 +53,22 @@ Purple Box is scalable serverless platform that gathers and monitors sensordata.
             return null;
         }
     }
+
+## Accepted JSON key-value pairs with example values
+
+    “Appid”:”visitorCounter”
+    "Devid":"1"
+    "timeStamp":"24.12.2016 12:00:00"
+    “Location”: 
+    	“coordinates” : [62.123, 21.512]
+    	“speed”:”10m/s”
+    	“Heading”:”123”
+    	“Altitude”:”123”
+    	“audio”:“Maxdecibel”:”70db”
+    “motionsensor”:
+    	“acceleration”:”[9.8, 1.1, 0.2]”
+    	“Stepcounter”:”123”
+    “device”:
+    	“Battery”:”43”
+    	“msg”:"all good!”
+    	“storage”:”10/32gb”
