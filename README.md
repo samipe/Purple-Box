@@ -33,12 +33,12 @@ Purple Box is scalable serverless platform that gathers and monitors sensordata.
         @Override
         protected Void doInBackground(Void... voids) {
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost post = new HttpPost("http://busdata.metropolia.fi:80/bussidata");
+            HttpPost post = new HttpPost("http://your.url.here.com:80");
             post.addHeader("Content-Type", "application/json; charset=UTF-8");
 
             try {
                 JSONObject jsonobj = new JSONObject();
-                jsonobj.put("msg", Toimii.);
+                jsonobj.put("msg", "all good!”);
 
                 StringEntity se = new StringEntity(jsonobj.toString());
                 Log.e("mainToPost", "mainToPost" + jsonobj.toString());
@@ -72,3 +72,7 @@ Purple Box is scalable serverless platform that gathers and monitors sensordata.
     	“Battery”:”43”
     	“msg”:"all good!”
     	“storage”:”10/32gb”
+	
+##Purple Box App
+[Purple Box App](https://github.com/Robobussitiimi/Purple-Box-App)
+
