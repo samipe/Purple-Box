@@ -56,22 +56,23 @@ Purple Box is scalable serverless platform that gathers and monitors sensordata.
 
 ## Accepted JSON key-value pairs with example values
 
-    “Appid”:”visitorCounter”
+    “Appid”:”VisitorCounter”
     "Devid":"1"
-    "timeStamp":"24.12.2016 12:00:00"
+    "TimeStamp":"24.12.2016 12:00:00"
     “Location”: 
-    	“coordinates” : [62.123, 21.512]
-    	“speed”:”10m/s”
+    	“Coordinates” : [62.123, 21.512]
+    	“Speed”:”10m/s”
     	“Heading”:”123”
     	“Altitude”:”123”
-    	“audio”:“Maxdecibel”:”70db”
-    “motionsensor”:
-    	“acceleration”:”[9.8, 1.1, 0.2]”
+    “Audio”:
+    	“MaxDecibel”:”70db”
+    “MotionSensor”:
+    	“Acceleration”:”[9.8, 1.1, 0.2]”
     	“Stepcounter”:”123”
-    “device”:
+    “Device”:
     	“Battery”:”43”
-    	“msg”:"all good!”
-    	“storage”:”10/32gb”
+    	“Msg”:"all good!”
+    	“Storage”:”10/32gb”
 	
 ##Purple Box App
 [Purple Box App](https://github.com/Robobussitiimi/Purple-Box-App)
